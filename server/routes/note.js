@@ -3,6 +3,7 @@ const router = new Router()
 const { findNoteListByType, findNoteDetailById, notePublish } = require('../controllers/mysqlControl.js')
 const { formateDate } = require('../config/utils')
 
+// 找到对应类型的笔记列表
 router.post('/findNoteListByType', async (ctx) => {
   const { note_type } = ctx.request.body
   try {
@@ -21,6 +22,7 @@ router.post('/findNoteListByType', async (ctx) => {
   }
 })
 
+// 根据id找到笔记详情
 router.post('/findNoteDetailById', async (ctx) => {
   const { id } = ctx.request.body
   try {

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import axios from '../api'
 
 const routes = [
   {
@@ -63,11 +64,14 @@ const router = createRouter({
 
 // 路由守卫
 const whitePath = ['/login', '/register'] // 白名单
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   document.title = to.meta.title
 
   if (!whitePath.includes(to.path)) { // 想去的页面不在白名单中
-    if (!sessionStorage.getItem('user')) { // 没登录
+    // 发送鉴权请求
+    try{
+      const res = await axios.get('/protected-route')
+    }catch(err){
       next('/login') // 或者router.push('/login')
       return
     }
